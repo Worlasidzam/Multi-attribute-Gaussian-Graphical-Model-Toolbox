@@ -73,15 +73,13 @@ The framework is designed to support real multivariate datasets, including finan
 
 ```text
 .
-├── src/
-│ └── Core estimation and optimization routines
 ├── scripts/
-│ ├── run_stability_bic.m # Stability Selection and BIC experiments
+│ ├── run_stability_bic.m # Stability Selection and BIC experiment
 │ └── run_cv_only.m # Cross-validation experiments
-├── graph_generation/
-│ └── ER, BA, and chain graph generators
-├── examples/
-│ └── Minimal working examples
+├── src/
+│ └── Core estimation, ADMM, penalties, graph generation
+├── .gitignore
+├── LICENSE
 └── README.md
 ```
 
@@ -102,7 +100,7 @@ addpath(genpath(pwd))
 
 Main experiment scripts are located in the scripts directory:
 - run_stability_bic.m – Stability Selection and BIC
-- run_cv_only.m – Cross-Validation–based model selection
+- run_cv_only.m – Cross-Validation based model selection
 
 These scripts reproduce results reported in the associated thesis.
 

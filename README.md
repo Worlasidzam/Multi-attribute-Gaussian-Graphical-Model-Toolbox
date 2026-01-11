@@ -69,7 +69,6 @@ Ground-truth precision matrices are constructed to ensure positive definiteness,
 The framework is designed to support real multivariate datasets, including financial time series with multiple attributes per node. All model selection methods implemented here can be applied consistently to both synthetic and real data.
 
 ---
-```markdown
 ## Repository Structure
 
 ```text

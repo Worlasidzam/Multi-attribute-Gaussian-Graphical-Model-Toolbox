@@ -72,13 +72,17 @@ The framework is designed to support real multivariate datasets, including finan
 
 ## Repository Structure
 
+```text
 .
-├── src/ Core estimation and optimization routines
-├── scripts/ Main experiment scripts
-│ ├── run_stability_bic.m
-│ └── run_cv_only.m
-├── graph_generation/ ER, BA, and chain graph generators
-├── examples/ Minimal working examples
+├── src/
+│ └── Core estimation and optimization routines
+├── scripts/
+│ ├── run_stability_bic.m # Stability Selection and BIC experiments
+│ └── run_cv_only.m # Cross-validation experiments
+├── graph_generation/
+│ └── ER, BA, and chain graph generators
+├── examples/
+│ └── Minimal working examples
 └── README.md
 
 ---

@@ -1,11 +1,12 @@
-# Multi-attribute Gaussian Graphical Model Estimation.
-Multi-attribute Gaussian graphical model estimation and model selection for high dimensional learning and Inference.
+# Multi-attribute Gaussian Graphical Model Toolbox
 
 This repository provides MATLAB implementations for sparse estimation and model selection in multi-attribute Gaussian graphical models (MA-GGMs). The code accompanies a Master’s thesis and follows the methodology developed in:
 
-J. K. Tugnait, "Multi-Attribute Graph Estimation With Sparse-Group Non-Convex Penalties," IEEE Access, 2025.
+J. K. Tugnait,
+“Multi-Attribute Graph Estimation With Sparse-Group Non-Convex Penalties,”
+IEEE Access, 2025.
 
-The focus is on high-dimensional settings where the number of variables is large relative to the sample size and regularization is required for stable and interpretable graph recovery.
+The focus is on high-dimensional settings where the number of variables is large relative to the sample size and regularization is required for stable, interpretable graph recovery.
 
 ---
 
@@ -13,11 +14,11 @@ The focus is on high-dimensional settings where the number of variables is large
 
 In a multi-attribute graphical model, each node in a graph is associated with a vector of attributes rather than a single scalar variable. Conditional dependencies between nodes are encoded through the block structure of the precision matrix.
 
-This library supports:
+This toolbox supports:
 - Sparse precision matrix estimation
 - Conditional independence graph recovery
-- Model selection using multiple criteria
-- Evaluation on synthetic and real-world datasets
+- Model selection under small-sample, high-dimensional regimes
+- Evaluation on synthetic graph models and real data
 
 ---
 
@@ -46,7 +47,7 @@ Edges in the graph correspond to nonzero off-diagonal blocks of Ω, encoding con
 - Sparse-group penalties with mixing parameter α
 
 ### Model Selection
-- Stability Selection (pruned and unpruned)
+- Stability Selection (with and without pruning)
 - Bayesian Information Criterion (BIC)
 - Cross-Validation (CV)
 
@@ -54,32 +55,31 @@ Edges in the graph correspond to nonzero off-diagonal blocks of Ω, encoding con
 
 ## Graph Models (Synthetic Data)
 
-The library supports synthetic graph generation for controlled evaluation:
+The toolbox supports controlled generation of synthetic graphs:
 - Erdős–Rényi (ER) graphs
 - Barabási–Albert (BA) graphs
-- Chain graphs 
+- Chain graphs
 
-Ground-truth precision matrices are constructed to ensure positive definiteness, controlled sparsity, and realistic intra-node attribute correlation.
+Ground-truth precision matrices are constructed to ensure positive definiteness, controlled sparsity, and realistic intra-node attribute correlation (AR-type decay).
 
 ---
 
 ## Real Data Experiments
 
-The framework is designed to support real multivariate datasets, including financial time series and other multi-attribute measurements. All model selection methods can be applied consistently across synthetic and real data.
+The framework is designed to support real multivariate datasets, including financial time series with multiple attributes per node. All model selection methods implemented here can be applied consistently to both synthetic and real data.
 
 ---
 
-## Repository Structure (Planned)
+## Repository Structure
 
 .
-├── src/                 Core estimation and optimization routines  
-├── model_selection/     BIC, CV, Stability Selection  
-├── graph_generation/    ER, BA, Chain graph generators  
-├── experiments/         Scripts reproducing thesis results  
-├── examples/            Minimal working examples  
-└── README.md  
-
-The codebase is currently being cleaned and modularized for public release.
+├── src/ Core estimation and optimization routines
+├── scripts/ Main experiment scripts
+│ ├── run_stability_bic.m
+│ └── run_cv_only.m
+├── graph_generation/ ER, BA, and chain graph generators
+├── examples/ Minimal working examples
+└── README.md
 
 ---
 
@@ -96,13 +96,17 @@ After cloning the repository, add it to the MATLAB path:
 
 addpath(genpath(pwd))
 
-Example experiment scripts reproduce results reported in the associated thesis. Additional documentation and examples will be expanded in future revisions.
+Main experiment scripts are located in the scripts directory:
+- run_stability_bic.m – Stability Selection and BIC
+- run_cv_only.m – Cross-Validation–based model selection
+
+These scripts reproduce results reported in the associated thesis.
 
 ---
 
 ## Status
 
-This repository is under active development. Code organization, documentation, and examples are being refined.
+This repository is under active development. Code structure and documentation are being refined as part of ongoing research.
 
 ---
 
@@ -110,31 +114,33 @@ This repository is under active development. Code organization, documentation, a
 
 If you use this code, please cite:
 
-J. K. Tugnait,  
-"Multi-Attribute Graph Estimation With Sparse-Group Non-Convex Penalties,"  
+J. K. Tugnait,
+“Multi-Attribute Graph Estimation With Sparse-Group Non-Convex Penalties,”
 IEEE Access, 2025.
 
-and the associated Master's thesis:
-"Model Selection for Multi-attribute Gaussian Graphical Models"
+and the associated Master’s thesis:
+
+Model Selection for Multi-Attribute Gaussian Graphical Models
 Auburn University, 2026
 
 ---
 
 ## Author
 
-Worlasi Kofi Dzam  
-Master's Student, Electrical Engineering  
+Worlasi Kofi Dzam
+Master’s Student, Electrical Engineering
 Auburn University
 
 ---
 
 ## License
 
-A permissive open-source license will be added in a future release.
+This project is released under the MIT License. See the LICENSE file for details.
 
 ---
 
 ## Contact
-email: wkd0014@auburn.edu
+
+Email: wkd0014@auburn.edu
 
 For questions or collaboration inquiries, please open an issue or contact the author directly.

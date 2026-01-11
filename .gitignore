@@ -1,0 +1,28 @@
+#MATLAB autosave filess
+*.asv
+
+#MATLAB binary files
+*.mat
+
+#MATLAB mex files
+*.mex*
+*.pcode
+
+#MATLAB Simulink cache
+slprj/
+sccprj/
+
+#MATLAB Live Script backups
+*.mlx~
+
+#MATLAB generated code folders
+codegen/
+
+#0S files
+.DS_Store
+Thumbs.db
+
+#Editor temporary files
+*~
+*.swp
+

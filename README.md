@@ -17,12 +17,11 @@ This repository provides MATLAB implementations for sparse estimation and model 
 
 In a multi-attribute graphical model, each node in a graph is associated with a vector of *m* attributes rather than a single scalar variable. Conditional independence between nodes *i* and *j* corresponds to the entire *m × m* off-diagonal block Ω^(ij) of the precision matrix being zero.
 
-This toolbox implements and compares four regularization selection methods for estimating the graph structure:
+This toolbox implements and compares three regularization selection methods for estimating the graph structure:
 
-1. **BIC** — Bayesian Information Criterion
-2. **Cross-Validation (CV)** — K-fold cross-validation using log-likelihood loss
-3. **StARS** — Stability Approach to Regularization Selection
-4. **StARS + BIC** — Two-stage method: StARS for initial selection, BIC for refinement
+1. **Stability Selection (SS)** — Stability Approach to Regularization Selection (StARS), with optional pruning via selection probabilities
+2. **BIC** — Bayesian Information Criterion
+3. **Cross-Validation (CV)** — K-fold cross-validation using log-likelihood loss
 
 Each method is evaluated with two penalty types:
 - **Lasso** (ℓ₁) — convex group-sparse penalty
@@ -33,9 +32,9 @@ Each method is evaluated with two penalty types:
 ## Key Findings
 
 - **LSP consistently outperforms Lasso** across all selection methods and graph types
-- **StARS + BIC (LSP)** achieves the best overall performance, combining stability-based screening with information-theoretic refinement
-- **BIC (LSP)** is the best single-stage method
-- **CV requires significantly larger sample sizes** (N ≥ 1200) to perform well
+- **BIC (LSP)** provides the best overall balance between accuracy and sparsity at moderate-to-large sample sizes
+- **SS (LSP) with pruning** is highly effective in sparse or small-sample regimes
+- **CV requires significantly larger sample sizes** (N ≥ 1200) to perform well, but achieves near-perfect recovery with LSP at large N
 - Results are consistent across Erdős–Rényi, Barabási–Albert, and chain graph structures
 
 ---
@@ -58,16 +57,18 @@ addpath(genpath(pwd))
 
 ### Synthetic Experiments
 
-Main experiment scripts are located in the `scripts/` directory:
+Main experiment scripts:
 
-- `run_stability_bic.m` — Stability Selection and BIC experiments
-- `run_cv_only.m` — Cross-Validation based model selection
-
-These scripts reproduce results reported in the associated thesis.
+- `multiAttri_main_stab_allBic.m` — Stability Selection and BIC experiments
+- `multiAttri_main_cv_only.m` — Cross-Validation based model selection
 
 ### Real Data Experiments
 
-The framework is designed to support real multivariate datasets, including financial time series with multiple attributes per node (e.g., S&P 100 stock data with open, high, low, close prices). All model selection methods implemented here can be applied consistently to both synthetic and real data.
+- `multiAttr_real_ss_all_new.m` — Stability Selection on S&P 100 data
+- `multiAttr_real_bic_all_new.m` — BIC on S&P 100 data
+- `multiAttr_real_cv_all_new.m` — Cross-Validation on S&P 100 data
+
+The S&P 100 dataset consists of 97 stocks with four daily attributes (high, low, close, volume) over 1259 trading days (April 2015 – April 2020), sourced from Yahoo Finance.
 
 ---
 
@@ -75,13 +76,19 @@ The framework is designed to support real multivariate datasets, including finan
 
 ```text
 .
-├── scripts/
-│   ├── run_stability_bic.m       # Stability Selection and BIC experiment
-│   └── run_cv_only.m             # Cross-validation experiments
-├── src/
-│   └── Core estimation, ADMM, penalties, graph generation
-├── data/
-│   └── Financial dataset (S&P 100, source: Yahoo Finance)
+├── multiAttri_main_stab_allBic.m   # SS and BIC synthetic experiments
+├── multiAttri_main_cv_only.m       # CV synthetic experiments
+├── multiAttr_real_ss_all_new.m     # SS on S&P 100 data
+├── multiAttr_real_bic_all_new.m    # BIC on S&P 100 data
+├── multiAttr_real_cv_all_new.m     # CV on S&P 100 data
+├── GenGraphPrec.m                  # Graph and precision matrix generation
+├── dataGen.m                       # Gaussian data generation
+├── optimize_admm_ma.m              # ADMM solver (lasso)
+├── opt_admm_ma_adap.m              # ADMM solver (LSP/adaptive)
+├── stab_selec_modv4.m              # Stability selection
+├── bic_selec.m                     # BIC selection
+├── bisection_uplim.m               # Lambda grid upper limit via bisection
+├── performance.m                   # F1-score and Hamming distance
 ├── .gitignore
 ├── LICENSE
 └── README.md

@@ -57,12 +57,14 @@ addpath(genpath(pwd))
 
 ### Synthetic Experiments
 
-Main experiment scripts:
+Scripts in `scripts/`:
 
-- `multiAttri_main_stab_allBic.m` — Stability Selection and BIC experiments
-- `multiAttri_main_cv_only.m` — Cross-Validation based model selection
+- `run_stability_bic.m` — Stability Selection and BIC experiments
+- `run_cv_only.m` — Cross-Validation based model selection
 
 ### Real Data Experiments
+
+Scripts in `scripts/`:
 
 - `multiAttr_real_ss_all_new.m` — Stability Selection on S&P 100 data
 - `multiAttr_real_bic_all_new.m` — BIC on S&P 100 data
@@ -76,19 +78,23 @@ The S&P 100 dataset consists of 97 stocks with four daily attributes (high, low,
 
 ```text
 .
-├── multiAttri_main_stab_allBic.m   # SS and BIC synthetic experiments
-├── multiAttri_main_cv_only.m       # CV synthetic experiments
-├── multiAttr_real_ss_all_new.m     # SS on S&P 100 data
-├── multiAttr_real_bic_all_new.m    # BIC on S&P 100 data
-├── multiAttr_real_cv_all_new.m     # CV on S&P 100 data
-├── GenGraphPrec.m                  # Graph and precision matrix generation
-├── dataGen.m                       # Gaussian data generation
-├── optimize_admm_ma.m              # ADMM solver (lasso)
-├── opt_admm_ma_adap.m              # ADMM solver (LSP/adaptive)
-├── stab_selec_modv4.m              # Stability selection
-├── bic_selec.m                     # BIC selection
-├── bisection_uplim.m               # Lambda grid upper limit via bisection
-├── performance.m                   # F1-score and Hamming distance
+├── scripts/
+│   ├── run_stability_bic.m             # SS and BIC synthetic experiments
+│   ├── run_cv_only.m                   # CV synthetic experiments
+│   ├── multiAttr_real_ss_all_new.m     # SS on S&P 100 data
+│   ├── multiAttr_real_bic_all_new.m    # BIC on S&P 100 data
+│   └── multiAttr_real_cv_all_new.m     # CV on S&P 100 data
+├── src/
+│   ├── BAModel_mod.m                   # Barabási–Albert graph generator
+│   ├── GenGraphPrec.m                  # Graph and precision matrix generation
+│   ├── bic_selec.m                     # BIC selection
+│   ├── bisection_uplim.m              # Lambda grid upper limit via bisection
+│   ├── dataGen.m                       # Gaussian data generation
+│   ├── opt_admm_ma.m                   # ADMM solver
+│   ├── opt_admm_ma_adap.m              # ADMM solver (LSP/adaptive)
+│   ├── optimize_admm_ma.m              # ADMM optimizer wrapper
+│   ├── performance.m                   # F1-score and Hamming distance
+│   └── stab_selec_modv4.m              # Stability selection
 ├── .gitignore
 ├── LICENSE
 └── README.md
